@@ -1,0 +1,39 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/couple_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: ${MYSQL_PASSWORD:12345}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:couple-app-secret-key-change-in-production-2024}
+    expiration: 604800000  # 7 days in ms
+  minio:
+    endpoint: ${MINIO_ENDPOINT:http://192.168.65.134:9000}
+    access-key: ${MINIO_ACCESS_KEY:root}
+    secret-key: ${MINIO_SECRET_KEY:root1122}
+    bucket: ${MINIO_BUCKET:couple}
+  file:
+    upload-dir: ${FILE_UPLOAD_DIR:./uploads}
+    image-max-size: 10485760      # 10MB
+    video-max-size: 104857600     # 100MB
+  geoip:
+    db-path: classpath:geoip/GeoLite2-City.mmdb

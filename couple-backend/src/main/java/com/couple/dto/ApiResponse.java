@@ -1,0 +1,28 @@
+package com.couple.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class ApiResponse<T> {
+    private int code;
+    private String message;
+    private T data;
+
+    public static <T> ApiResponse<T> ok(T data) {
+        return new ApiResponse<>(200, "success", data);
+    }
+
+    public static <T> ApiResponse<T> ok() {
+        return new ApiResponse<>(200, "success", null);
+    }
+
+    public static <T> ApiResponse<T> error(int code, String message) {
+        return new ApiResponse<>(code, message, null);
+    }
+
+    public static <T> ApiResponse<T> error(String message) {
+        return new ApiResponse<>(500, message, null);
+    }
+}

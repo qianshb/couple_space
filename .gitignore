@@ -1,0 +1,35 @@
+# ===== IntelliJ IDEA =====
+.idea/shelf/
+.idea/workspace.xml
+.idea/httpRequests/
+.idea/dataSources/
+.idea/dataSources.local.xml
+
+# ===== Maven =====
+target/
+*.log
+*.jar
+*.war
+
+# ===== Node / Vite =====
+node_modules/
+dist/
+.vite/
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# ===== Env & Secrets =====
+*.env
+*.env.local
+*.env.*.local
+!*.env.example
+
+# ===== Misc =====
+*.tmp
+*.bak
+.cache/
