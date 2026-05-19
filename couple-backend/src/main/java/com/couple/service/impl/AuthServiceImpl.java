@@ -48,7 +48,11 @@ public class AuthServiceImpl implements AuthService {
 
         // IP 定位城市
         String ip = getClientIp();
-        user.setCity(geoIpUtil.getCity(ip));
+        var info = geoIpUtil.getInfo(ip);
+        user.setCity(info.city());
+        user.setLatitude(info.latitude());
+        user.setLongitude(info.longitude());
+        user.setIp(ip);
 
         userMapper.insert(user);
 
@@ -67,11 +71,14 @@ public class AuthServiceImpl implements AuthService {
             throw new BusinessException("用户名或密码错误");
         }
 
-        // 更新城市
+        // 更新城市（GeoIP 返回真实城市时才更新）
         String ip = getClientIp();
-        String city = geoIpUtil.getCity(ip);
-        if (!city.equals(user.getCity())) {
-            user.setCity(city);
+        var info = geoIpUtil.getInfo(ip);
+        if (!"未知".equals(info.city()) && !info.city().equals(user.getCity())) {
+            user.setCity(info.city());
+            user.setLatitude(info.latitude());
+            user.setLongitude(info.longitude());
+            user.setIp(ip);
             userMapper.updateById(user);
         }
 

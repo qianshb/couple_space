@@ -18,6 +18,9 @@ public class User {
     private String avatar;
     private LocalDate birthday;
     private String city;
+    private Double latitude;
+    private Double longitude;
+    private String ip;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

@@ -80,6 +80,9 @@ public class UserServiceImpl implements UserService {
         resp.setNickname(partner.getNickname());
         resp.setAvatar(partner.getAvatar());
         resp.setCity(partner.getCity());
+        resp.setLatitude(partner.getLatitude());
+        resp.setLongitude(partner.getLongitude());
+        resp.setIp(partner.getIp());
         return resp;
     }
 }

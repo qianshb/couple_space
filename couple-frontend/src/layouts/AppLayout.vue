@@ -16,7 +16,8 @@ const navItems = [
   { path: '/memorial', icon: '📅', label: '纪念日',   badge: '' },
   { path: '/wish',     icon: '💝', label: '心愿单',   badge: '' },
   { path: '/bind',     icon: '💑', label: '情侣绑定', badge: '' },
-  { path: '/settings', icon: '⚙️', label: '设置',     badge: '' },
+  { path: '/location', icon: '🌍', label: '我们的位置', badge: '' },
+  { path: '/settings',   icon: '⚙️', label: '设置',     badge: '' },
 ]
 
 const isActive = (path: string) => {

@@ -37,3 +37,4 @@ app:
     video-max-size: 104857600     # 100MB
   geoip:
     db-path: classpath:geoip/GeoLite2-City.mmdb
+    mock-ip: 114.114.114.114

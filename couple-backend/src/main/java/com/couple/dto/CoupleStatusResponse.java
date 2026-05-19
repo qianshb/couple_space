@@ -9,4 +9,7 @@ public class CoupleStatusResponse {
     private String partnerNickname;   // 对方昵称（已绑定时有值）
     private String partnerAvatar;
     private String partnerCity;       // 对方所在城市
+    private Double partnerLatitude;
+    private Double partnerLongitude;
+    private String partnerIp;
 }

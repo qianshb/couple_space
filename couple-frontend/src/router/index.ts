@@ -45,6 +45,11 @@ const router = createRouter({
           name: 'wish',
           component: () => import('@/views/WishView.vue'),
         },
+        {
+          path: 'location',
+          name: 'location',
+          component: () => import('@/views/LocationView.vue'),
+        },
       ]
     },
   ]

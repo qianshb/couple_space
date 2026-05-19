@@ -120,6 +120,9 @@ public class CoupleServiceImpl implements CoupleService {
                 resp.setPartnerNickname(partner.getNickname());
                 resp.setPartnerAvatar(partner.getAvatar());
                 resp.setPartnerCity(partner.getCity());
+                resp.setPartnerLatitude(partner.getLatitude());
+                resp.setPartnerLongitude(partner.getLongitude());
+                resp.setPartnerIp(partner.getIp());
             }
             return resp;
         }

@@ -14,6 +14,9 @@ public class UserResponse {
     private LocalDate birthday;
     private String constellation;
     private String city;
+    private Double latitude;
+    private Double longitude;
+    private String ip;
 
     public static UserResponse from(User user) {
         UserResponse r = new UserResponse();
@@ -24,6 +27,9 @@ public class UserResponse {
         r.birthday = user.getBirthday();
         r.constellation = getConstellation(user.getBirthday());
         r.city = user.getCity();
+        r.latitude = user.getLatitude();
+        r.longitude = user.getLongitude();
+        r.ip = user.getIp();
         return r;
     }
 

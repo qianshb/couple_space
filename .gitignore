@@ -29,7 +29,13 @@ Thumbs.db
 *.env.*.local
 !*.env.example
 
+# ===== GeoIP =====
+couple-backend/src/main/resources/geoip/
+
 # ===== Misc =====
 *.tmp
 *.bak
 .cache/
+*.class
+cp.txt
+TestGeoIp.java
