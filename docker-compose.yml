@@ -1,0 +1,84 @@
+# ============================================
+# 情侣空间 Docker Compose 部署
+# ============================================
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: couple-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: couple_db
+      MYSQL_USER: couple
+      MYSQL_PASSWORD: couple123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./couple-backend/src/main/resources/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  minio:
+    image: minio/minio:latest
+    container_name: couple-minio
+    restart: always
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: root
+      MINIO_ROOT_PASSWORD: root123
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./couple-backend
+    container_name: couple-backend
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SERVER_PORT: 8080
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root123
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: root
+      MINIO_SECRET_KEY: root123
+      MINIO_BUCKET: couple
+      JWT_SECRET: couple-app-prod-secret-2026-change-me
+      FILE_UPLOAD_DIR: /data/uploads
+    ports:
+      - "8080:8080"
+    volumes:
+      - uploads_data:/data/uploads
+
+  nginx:
+    build: ./couple-frontend
+    container_name: couple-nginx
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+
+volumes:
+  mysql_data:
+  minio_data:
+  uploads_data:
