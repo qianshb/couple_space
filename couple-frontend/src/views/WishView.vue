@@ -17,6 +17,8 @@ async function fetchList() {
   loading.value = true
   try {
     wishes.value = await getWishList()
+  } catch {
+    wishes.value = []
   } finally {
     loading.value = false
   }
@@ -48,6 +50,8 @@ async function handleCreate() {
     ElMessage.success('心愿添加成功 💝')
     dialogVisible.value = false
     await fetchList()
+  } catch {
+    /* error shown by interceptor */
   } finally {
     saving.value = false
   }

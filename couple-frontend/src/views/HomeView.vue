@@ -36,7 +36,7 @@ async function fetchPosts() {
       noMore.value = true
     }
   } catch {
-    // handled by interceptor
+    posts.value = []
   } finally {
     loading.value = false
   }

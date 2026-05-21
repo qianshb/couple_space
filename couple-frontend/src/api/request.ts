@@ -29,7 +29,8 @@ request.interceptors.response.use(
       localStorage.removeItem('user')
       window.location.href = '/login'
     }
-    ElMessage.error(error.message || '网络错误')
+    const msg = error.response?.data?.message || error.message || '網絡錯誤'
+    ElMessage.error(msg)
     return Promise.reject(error)
   }
 )

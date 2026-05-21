@@ -14,6 +14,8 @@ async function fetchList() {
   loading.value = true
   try {
     memorials.value = await getMemorialList()
+  } catch {
+    memorials.value = []
   } finally {
     loading.value = false
   }
@@ -50,6 +52,8 @@ async function handleCreate() {
     ElMessage.success('纪念日创建成功 💕')
     dialogVisible.value = false
     await fetchList()
+  } catch {
+    /* error shown by interceptor */
   } finally {
     saving.value = false
   }
